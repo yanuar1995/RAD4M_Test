@@ -20,17 +20,21 @@ namespace RAD4M_Test.Controllers
             _context = context;
         }
 
+        //===================================================================================================
+      
         // GET: api/ToDo
-        // for this code use to display attribute or get all todo list
+        // for this sourcecode use to display attribute or get all todo list
+        // My db name is Todo
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDo>>> GetToDo()
         {
             return await _context.ToDo.ToListAsync();
         }
 
+        //===================================================================================================
 
         // GET: api/ToDo/5
-        // get specific todo
+        // for this sourcecode use to display attribute specific in todo
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ToDo>> GetToDo(int id)
@@ -45,7 +49,10 @@ namespace RAD4M_Test.Controllers
             return toDo;
         }
 
+        //===================================================================================================
+
         //get incoming todo
+        // 
         [HttpGet("incoming")]
         public IEnumerable<ToDo> GetToIncoming()
         {
@@ -59,8 +66,10 @@ namespace RAD4M_Test.Controllers
             return toDoModel.ToArray();
         }
 
-        // PUT: api/ToDo/5
+        //===================================================================================================
 
+        // PUT: api/ToDo/5
+        // For update todo (the model must declare all)
         [HttpPut("{id}")]
         public async Task<IActionResult> PutToDo(int id, ToDo toDo)
         {
@@ -89,6 +98,8 @@ namespace RAD4M_Test.Controllers
 
             return NoContent();
         }
+
+        //===================================================================================================
 
         // Set Todo percent complete (declare precentage only on body)
 
@@ -123,8 +134,10 @@ namespace RAD4M_Test.Controllers
             return NoContent();
         }
 
+        //===================================================================================================
 
         // POST: api/ToDo
+        // Create Todo
 
         [HttpPost]
         public async Task<ActionResult<ToDo>> PostToDo(ToDo toDo)
@@ -135,7 +148,11 @@ namespace RAD4M_Test.Controllers
             return CreatedAtAction("GetToDo", new { id = toDo.Todoid }, toDo);
         }
 
+        //===================================================================================================
+
         // DELETE: api/ToDo/5
+        // Delete Todo
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<ToDo>> DeleteToDo(int id)
         {
@@ -156,6 +173,8 @@ namespace RAD4M_Test.Controllers
             return _context.ToDo.Any(e => e.Todoid == id);
         }
 
+        //===================================================================================================
+
         // PUT: api/ToDoModels/MarkDone/5
         // Mark Todo as Done (declare precentage only on body)
         [HttpPut("markdone/{id}")]
@@ -165,7 +184,6 @@ namespace RAD4M_Test.Controllers
             var todochange = await _context.ToDo.FindAsync(id);
             todochange.TodoStatus = true;
             _context.SaveChanges();
-
 
             try
             {
